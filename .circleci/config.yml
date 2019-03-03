@@ -42,7 +42,7 @@ jobs:
       - image: python:3.7
     steps:
       - attach_workspace:
-          at: html
+          at: dist
       - add_ssh_keys:
           fingerprints:
             - "e0:38:61:2a:06:e9:52:8f:e6:6e:bb:88:b5:ab:e2:59"
@@ -57,7 +57,7 @@ jobs:
             git config --global user.email "slothette.io@gmail.com"
             git config --global user.name "Slothette (Circle-CI)"
             git clone git@github.com:slothetteio/slothette.io-static .
-            cp ../dist/html/* ./
+            cp -r ../dist/html/ ./
             echo -e ${CIRCLE_SHA1} >> ./version.html
             git add .
             git commit -m "Release ${CIRCLE_SHA1}"

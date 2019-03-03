@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.15.2
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Build client files
+          command: |
+            USE_FULL_TEMPLATE=true USE_HASHES=true \
+            USE_MINIFICATION=true EXTRACT_CSS=true \
+            npx webpack --config webpack.config.js
+      - run:
+          name: Build server renderer
+          command: USE_MINIFICATION=true npx webpack --config webpack-server.config.js
+      - run:
+          name: Export static html
+          command: node build/export-html.js
+
+      - persist_to_workspace:
+          root: dist
+          paths: html
+
+  deploy:
+    docker:
+      - image: python:3.7
+    steps:
+      - attach_workspace:
+          at: html
+      - add_ssh_keys:
+          fingerprints:
+            - "e0:38:61:2a:06:e9:52:8f:e6:6e:bb:88:b5:ab:e2:59"
+      - run:
+          name: Avoid hosts unknown for github
+          command: echo -e "\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+      - run:
+          name: Push to dest repo
+          command: |
+            mkdir temp
+            cd temp
+            git config --global user.email "slothette.io@gmail.com"
+            git config --global user.name "Slothette (Circle-CI)"
+            git clone git@github.com:slothetteio/slothette.io-static .
+            cp ../dist/html/* ./
+            echo -e ${CIRCLE_SHA1} >> ./version.html
+            git add .
+            git commit -m "Release ${CIRCLE_SHA1}"
+            git push origin

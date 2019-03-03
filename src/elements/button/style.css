@@ -1,0 +1,22 @@
+@value vars: '../../css/vars.css';
+@value linkColor from vars;
+@value transitionTimeAndEase from vars;
+
+.Button {
+  background: transparent;
+
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: bold;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  transition: color transitionTimeAndEase, border-color transitionTimeAndEase;
+}
+.Button:hover:not(:disabled){
+  border: 1px solid linkColor;
+  color: linkColor;
+}
+.Button:disabled {
+  cursor: not-allowed;
+}

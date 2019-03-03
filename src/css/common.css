@@ -1,0 +1,20 @@
+/**
+  Included on demand by components that need some general purpose styling
+
+  This allows avoiding creating react components only for simple visual elements
+ */
+
+.subHeading {
+    color: hsl(18, 72%, 52%);
+    margin-top: 4px;
+}
+
+/* top level section */
+.section {
+    background-color: hsl(0, 0%, 96%);
+    border: 1px solid lightgray;
+    padding: 10px 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: 20px;
+}

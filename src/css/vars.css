@@ -1,0 +1,14 @@
+/**
+
+Usage:
+```
+@value vars: '.../css/vars.css';
+@value transitionTimeAndEase from vars;
+...
+transition: color transitionTimeAndEase
+```
+
+ */
+
+@value linkColor: #1890ff;
+@value transitionTimeAndEase:  0.15s ease-in-out;

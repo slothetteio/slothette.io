@@ -1,0 +1,13 @@
+/**
+  Global css
+  This file is always included the app/index.jsx
+ */
+
+h2 {
+  color: hsl(0, 0%, 30%);
+  margin: 0;
+}
+
+code {
+  font-family: _,monospace;
+}

@@ -1,0 +1,17 @@
+.OneSmallLayout {
+  display: flex;
+}
+
+.left {
+  padding-right: 10px;
+}
+.right {
+  padding-left: 10px;
+}
+
+.big{
+  flex-grow: 1;
+}
+.small {
+
+}

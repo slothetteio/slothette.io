@@ -1,0 +1,13 @@
+- not found
+- add og: and twitter: meta tagstags 
+  - http://ogp.me/ 
+  - https://css-tricks.com/essential-meta-tags-social-media/
+  - https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started.html
+  - og:title
+  - og: site_name
+  - og: description
+  - og: type
+  - og: image
+  - og: url
+- find a way to use hydrate instead of render (react dom)
+- add link rel=canonical

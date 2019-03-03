@@ -1,0 +1,10 @@
+.contentWrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.emptyNotification {
+  background-color: hsla(70, 78%, 80%, 1);
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+@value vars: '../../css/vars.css';
+@value linkColor from vars;
+
+.Link {
+    color: linkColor;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+}

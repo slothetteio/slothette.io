@@ -1,0 +1,5 @@
+.Textarea {
+  resize: vertical;
+  border: 1px dotted crimson;
+  font-size: 1.5rem;
+}

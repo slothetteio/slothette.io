@@ -1,0 +1,45 @@
+.numberInBase {
+  font-size: 1.8rem;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.highlight {
+  color: rgb(86, 78, 160);
+}
+
+
+.Table {
+  margin-top: 20px;
+
+  th {
+    border-bottom: 1px solid black;
+  }
+  width: 100%;
+  th, td {
+    text-align: right;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+.row:nth-child(even) td {
+  background-color: #f4f4f4;
+}
+.row:nth-child(4n) td {
+  color: black
+}
+
+.row td{
+  color: gray;
+}
+.fullByteRow td{
+  color: black;
+  background-color: #ebebeb !important;
+}
+
+.row:hover td {
+  /*background-color: #ebebb9!important;*/
+  background-color: hsla(139, 100%, 93%, 1)!important;
+}
+

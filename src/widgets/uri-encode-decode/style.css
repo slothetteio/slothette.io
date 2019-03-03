@@ -1,0 +1,42 @@
+.textarea {
+  border: none;
+  height: 140px;
+  &._error {
+    /*outline: 5px auto red;*/
+    /*outline-offset: -2px;*/
+    background-color: #f9dfd7;
+  }
+}
+
+.subSectionTitle {
+  font-style: italic;
+  font-size: 1.5rem;
+  color: hsl(0, 0%, 30%);
+  text-align: right;
+  & span {
+      background: white;
+      padding: 2px;
+      letter-spacing: -0.04em;
+    }
+
+}
+
+.inner {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: green;
+  &._error {
+    color: red;
+    background: yellow;
+  }
+
+  &._anim {
+    animation: atMount 0.6s ease-in-out;
+  }
+}
+
+@keyframes atMount {
+  from {
+    color: #C07018;
+  }
+}

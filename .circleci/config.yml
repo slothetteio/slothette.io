@@ -57,7 +57,7 @@ jobs:
             git config --global user.email "slothette.io@gmail.com"
             git config --global user.name "Slothette (Circle-CI)"
             git clone git@github.com:slothetteio/slothette.io-static .
-            cp -r ../dist/html/ ./
+            cp -r ../dist/html/* ./
             echo -e ${CIRCLE_SHA1} >> ./version.html
             git add .
             git commit -m "Release ${CIRCLE_SHA1}"

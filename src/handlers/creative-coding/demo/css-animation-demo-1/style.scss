@@ -1,0 +1,370 @@
+// @import "compass/css3";
+$PI:    3.141592653589793;
+@function sqrt ($x) {
+  @if $x < 0 {
+    @warn "Argument for `sqrt()` must be a positive number.";
+    @return null;
+  }
+  $ret: 1;
+  @for $i from 1 through 24 {
+    $ret: $ret - ($ret * $ret - $x) / (2 * $ret);
+  }
+  @return $ret;
+}
+@function atan ($x) {
+  $i:  24;
+  $sgn: 0;
+  $a:   0;
+  @if $x > 1 {
+    $sgn:  1;
+    $x:    1 / $x;
+  } @else if $x < -1 {
+    $sgn: -1;
+    $x:    1 / $x;
+  }
+  @while $i > 0 {
+    $a: ($i * $i * $x * $x) / (2 * $i + 1 + $a);
+    $i: $i - 1;
+  }
+  @if $sgn > 0 {
+    @return  $PI / 2 - $x / (1 + $a);
+  } @else if $sgn < 0 {
+    @return -$PI / 2 - $x / (1 + $a);
+  } @else {
+    @return            $x / (1 + $a);
+  }
+}
+
+$totalPiecesPerRow: 8;
+$totalPiecesPerColumn: $totalPiecesPerRow;
+
+$posTotalPieces: $totalPiecesPerRow / 2;
+
+$penHeight: 400px;
+$penWidth: $penHeight;
+
+$pieceWidth: $penHeight / $totalPiecesPerRow;
+$pieceHeight: $penWidth / $totalPiecesPerColumn;
+
+$pieceBgColor: darken(dodgerblue, 10%);
+$pieceBgColor: darken(dodgerblue, 20%);
+$pieceBgColor: #587498;
+$pieceBgColor: dodgerblue;
+
+.pen{
+  position: absolute;
+  width: $penWidth;
+  height: $penHeight;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  //background: orangered;
+  //background: radial-gradient(ellipse at center, #f7f711 0%,#a80321 82%,#a80321 100%);
+  background: radial-gradient(ellipse at center, #f7f711 0%,#b24c03 100%);
+  //background: ;
+}
+
+.container{
+  position: absolute;
+  width: $penWidth;
+  height: $penHeight;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 600px;
+  background: radial-gradient(ellipse at center, #f7f711 0%, #b24c03 100%);
+}
+
+.piece{
+  //border: 1px solid red;
+  position: absolute;
+  width: $pieceWidth;
+  height: $pieceHeight;
+  perspective: 600px;
+  perspective-origin: center center;
+  .one{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: $pieceBgColor;
+  }
+  @for $i from 1 through $totalPiecesPerRow{
+    @for $j from 1 through $totalPiecesPerColumn{
+      &.piece-#{$i}-#{$j}{
+        left: ($i - 1) * $pieceHeight;
+        top: ($j - 1) * $pieceWidth;
+      }
+    }
+  }
+}
+
+@function coordX($x){
+  $rx: $totalPiecesPerRow/2 + $x;
+  @if ($x < 0) {
+    $rx: $rx + 1;
+  }
+  @return $rx;
+}
+@function coordY($y){
+  $ry: $totalPiecesPerRow/2 - $y;
+  @if ($y > 0) {
+    $ry: $ry + 1;
+  }
+  @return $ry;
+}
+
+$maxDist: sqrt($posTotalPieces*$posTotalPieces + $posTotalPieces*$posTotalPieces);
+$d: 0;
+@for $i from 1 through $posTotalPieces{
+  @for $j from 1 through $i{
+    $d: $d + 1; //just an index
+    $x: coordX($i);
+    $y: coordY($j);
+    $mx: coordX(-$i);
+    $my: coordY(-$j);
+    $dist: sqrt($i*$i + $j*$j);
+    $angle: round(atan($j / $i) * (180/$PI )) * 1deg;
+    @keyframes circ-#{$d}-m {
+      $startPercent: 70 * $dist/$maxDist;
+      0%{
+        //background-color: $pieceBgColor;
+        transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ(-$angle);
+        box-shadow: inset 0px 0px 20px 2px transparent;
+      }
+    #{$startPercent}%{
+    //background-color: $pieceBgColor;
+    //box-shadow: none;
+    transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ(-$angle);
+    background-color: $pieceBgColor;
+    box-shadow: inset 0px 0px 20px 2px transparent;
+  }
+    #{$startPercent + 15}%{
+      //background-color: transparent;
+      //box-shadow: inset 0px 0px 14px 3px red;
+    transform: translateZ(40px) rotateY( 85deg ) rotateX(0deg) rotateZ(-$angle) scale(0.8);
+    background-color: darken($pieceBgColor, 10%);
+    box-shadow: inset 0px 0px 20px 2px #b24c03;
+
+  }
+  #{$startPercent + 40}%{
+    //background-color: $pieceBgColor;
+    //box-shadow: none;
+  transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ(-$angle);
+  background-color: $pieceBgColor;
+  box-shadow: inset 0px 0px 20px 2px transparent;
+  }
+  100%{
+    //background-color: $pieceBgColor;
+  transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ(-$angle);
+  box-shadow: inset 0px 0px 20px 2px transparent;
+  }
+  }
+  @keyframes circ-#{$d} {
+  $startPercent: 70 * $dist/$maxDist;
+  0%{
+    //background-color: $pieceBgColor;
+  transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ($angle);
+  box-shadow: inset 0px 0px 3px 0px transparent;
+  }
+  #{$startPercent}%{
+    //background-color: $pieceBgColor;
+    //box-shadow: none;
+  transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ($angle);
+  background-color: $pieceBgColor;
+  box-shadow: inset 0px 0px 3px 0px transparent;
+  }
+  #{$startPercent + 15}%{
+    //background-color: transparent;
+    //box-shadow: inset 0px 0px 14px 3px red;
+  transform: translateZ(40px) rotateY( 85deg ) rotateX(0deg) rotateZ($angle) scale(0.8);
+  background-color: darken($pieceBgColor, 10%);
+  box-shadow: inset 0px 0px 20px 2px #b24c03;
+  }
+  #{$startPercent + 40}%{
+    //background-color: $pieceBgColor;
+    //box-shadow: none;
+  transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ($angle);
+  background-color: $pieceBgColor;
+  box-shadow: inset 0px 0px 3px 0px transparent;
+  }
+  100%{
+    //background-color: $pieceBgColor;
+  transform: translateZ(0px) rotateY( 0deg ) rotateX(0deg) rotateZ($angle);
+  box-shadow: inset 0px 0px 3px 0px transparent;
+  }
+  }
+  .piece-#{$x}-#{$y}{
+  transform: rotate(-$angle );
+  .one{
+  transform: rotateZ($angle);
+  animation: circ-#{$d} 5s linear infinite;
+
+  }
+  }
+  .piece.piece-#{$x}-#{$my}{
+  $a: -$angle;
+  transform: rotateZ(-$a);
+  .one{
+  transform: rotateZ($a);
+  animation: circ-#{$d}-m 5s linear infinite;
+  }
+  }
+  .piece.piece-#{$mx}-#{$y}{
+  $a: 180deg - $angle;
+  transform: rotateZ(-$a);
+  .one{
+  transform: rotateZ($a);
+  animation: circ-#{$d}-m 5s linear infinite;
+  }
+  }
+  .piece.piece-#{$mx}-#{$my}{
+  $a: 180deg + $angle;
+  transform: rotateZ(-$a);
+  .one{
+  transform: rotateZ($a);
+  animation: circ-#{$d} 5s linear infinite;
+  }
+  }
+  .piece.piece-#{$y}-#{$x}{
+  $a: 90deg - $angle;
+  transform: rotateZ(-$a);
+  .one{
+  transform: rotateZ($a);
+  animation: circ-#{$d}-m 5s linear infinite;
+  }
+  }
+  .piece.piece-#{$my}-#{$x}{
+  $a: 90deg + $angle;
+  transform: rotate(-$a);
+  .one{
+  transform: rotate($a);
+  animation: circ-#{$d} 5s linear infinite;
+  }
+  }
+  .piece.piece-#{$y}-#{$mx}{
+  $a: 270deg + $angle;
+  transform: rotate(-$a);
+  .one{
+  transform: rotate($a);
+  animation: circ-#{$d} 5s linear infinite;
+  }
+  }
+  .piece.piece-#{$my}-#{$mx}{
+  $a: 270deg - $angle;
+  transform: rotate(-$a);
+  .one{
+  transform: rotate($a);
+  animation: circ-#{$d}-m 5s linear infinite;
+  }
+  }
+
+  .piece.piece-#{$x}-#{$y},
+  .piece.piece-#{$mx}-#{$y},
+  .piece.piece-#{$x}-#{$my},
+  .piece.piece-#{$mx}-#{$my},
+  .piece.piece-#{$y}-#{$x},
+  .piece.piece-#{$my}-#{$x},
+  .piece.piece-#{$y}-#{$mx},
+  .piece.piece-#{$my}-#{$mx},{
+    //background-color: hsl( 50, 50%, $v );
+    //animation: circ-#{$d} 5s linear infinite;
+
+  .one{
+    //transform: rotate($angle);
+    //animation: circ-#{$d} 5s linear infinite;
+  }
+  }
+  }
+}
+
+@keyframes smoke {
+  0%{
+    transform: translateX(0px) translateY(0px) scale(0.2);
+    opacity: 0;
+  }
+  10%{
+    transform: translateX(0px) translateY(-3px) scale(0.2);
+    opacity: 1;
+  }
+  100%{
+    transform: translateX(-10px) translateY(-60px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes smoke-r {
+  0%{
+    transform: translateX(0px) translateY(0px) scale(0.2);
+    opacity: 0;
+  }
+  10%{
+    transform: translateX(0px) translateY(-3px) scale(0.2);
+    opacity: 1;
+  }
+  100%{
+    transform: translateX(10px) translateY(-60px) scale(1);
+    opacity: 0;
+  }
+}
+
+$sw: $pieceWidth;
+.smoke{
+  position: absolute;
+  width: $sw;
+  height: $sw;
+  top: 0%;
+  left: 0%;
+
+  margin-top: -$sw;
+
+  margin-left: -$sw/2;
+
+  transform-origin: 50% 100%;
+
+  background: rgba(200, 200, 200, 0.5);
+  filter: blur(10px);
+  z-index: 100;
+
+  border-radius: 50%;
+  @for $i from 1 through 10{
+    &.smoke-#{$i}{
+      &.two{
+        left: 100%;
+      }
+      &.three{
+        left: 100%;
+        top: 100%;
+      }
+      &.four{
+        top: 100%;
+      }
+      animation: smoke 5s linear infinite;
+      @if $i % 2 == 0{
+        animation: smoke-r 5s linear infinite;
+      }
+      animation-delay: -#{$i/2}s;
+    }
+  }
+
+}
+
+html {
+  box-sizing: border-box;
+  //background: #F1ECDB;
+  background: dodgerblue;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+h2{
+  color: $pieceBgColor;
+  text-align: center;
+  font-size: 2.5em;
+  //text-shadow: 0px 0px 3px #444;
+  z-index: 300;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  right: 0;
+  bottom: 0;
+}

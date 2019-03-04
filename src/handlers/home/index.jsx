@@ -25,6 +25,22 @@ function Home() {
           XBase
         </Link>
       </h4>
+
+      <h3>
+        <Link to="/creative-coding">
+          Creative Coding
+        </Link>
+      </h3>
+      <h4>
+        <Link to="/creative-coding/css-sine-experiment">
+          CSS sine experiment
+        </Link>
+      </h4>
+      <h4>
+        <Link to="/creative-coding/css-animation-demo-1">
+          CSS animation demo 1
+        </Link>
+      </h4>
     </div>
   );
 

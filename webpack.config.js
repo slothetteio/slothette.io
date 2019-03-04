@@ -5,6 +5,8 @@ let CleanWebpackPlugin = require('clean-webpack-plugin');
 let FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const LoadablePlugin = require('@loadable/webpack-plugin');
+
 let MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
@@ -46,6 +48,7 @@ let plugins = [
     IS_SERVER: JSON.stringify(false),
     IS_CLIENT: JSON.stringify(true),
   }),
+  new LoadablePlugin(),
 ];
 
 if (useFullTemplate) {
@@ -123,6 +126,36 @@ let cssLoaders = extractCss ?
       },
     },
   ];
+let sassLoaders = extractCss ?
+  [
+    {
+      loader: MiniCssExtractPlugin.loader,
+      options: {},
+    },
+    {
+      loader: "css-loader",
+      options: {
+        modules: false,
+        localIdentName: '[local]-[hash:base64:5]',
+      },
+    },
+    {
+      loader: 'sass-loader',
+    },
+  ] : // ELSE
+  [
+    { loader: "style-loader" },
+    {
+      loader: "css-loader",
+      options: {
+        modules: false,
+        localIdentName: '[local]-[hash:base64:5]',
+      },
+    },
+    {
+      loader: 'sass-loader',
+    },
+  ];
 
 
 module.exports = {
@@ -156,6 +189,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: cssLoaders,
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.scss$/,
+        use: sassLoaders,
         exclude: /node_modules/,
       },
     ],

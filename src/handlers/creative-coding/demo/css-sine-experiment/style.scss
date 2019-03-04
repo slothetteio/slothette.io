@@ -1,0 +1,233 @@
+
+$penWidth: 700px;
+$penHeight: 450px;
+$staticWidth: 30px;
+$staticHeight: $staticWidth;
+$staticsTotal: 7;
+$staticPadding: $penWidth / 8;
+
+$oneDuration: 1s;
+$hDuration: 1s * ($staticsTotal - 1);
+$hDist: $staticPadding * ($staticsTotal - 1);
+$vDuration: $oneDuration;
+$vDist: $staticPadding;
+
+$dividerColor: cyan;
+$dividerHeight: $penHeight/2;
+
+$colors: (#3498db, #2a79af, #1abc9c, #995156, #2ecc71, #8e44ad, #8e44ad);
+
+
+
+.staticWrapper{
+  position: absolute;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.moveWrapper{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: $staticPadding;
+
+  width: 10px;
+  height: 10px;
+}
+.static{
+  border-radius: 50%;
+  position: absolute;
+  width: $staticWidth;
+  height: $staticHeight;
+  top: 50%;
+  background: khaki;
+
+  transform: translateY(-50%);
+
+  @for $i from 1 through $staticsTotal{
+    &:nth-child(#{$i}){
+      background: saturate(nth($colors, $i), 20%);
+      left: $staticPadding * $i;
+      $dur: $hDuration;
+      $del: -(($i) * ($hDuration)/($staticsTotal - 1) - 1s);
+
+      $animStart: ($i - 1) * 1s / ($hDuration) * 100;
+
+      animation: attract-#{$i} $dur linear infinite alternate;
+      //animation-delay: $del;// - 1.2s;
+      @if $i != 1{
+        @keyframes attract-#{$i}{
+          0%{
+
+          }
+        #{($animStart - 4)}%{
+        transform: translateY(-50%) scale(1);
+      }
+        #{$animStart}%{
+        transform: translateY(-50%) scale(1.3);
+      }
+      #{($animStart + 2)}%{
+      transform: translateY(-50%) scale(1);
+      }
+      100%{
+
+      }
+      }
+      }
+    }
+  }
+  &:nth-child(1),
+  &:nth-child(#{$staticsTotal}){
+    background: lighten(yellow, 20%);
+    background: transparent;
+    height: $dividerHeight;
+    width: 4px;
+    animation: none;
+    overflow: hidden;
+    box-shadow: -2px 0px 4px;
+    &:before{
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0px;
+      height: 0px;
+      animation: v $vDuration ease-in-out infinite alternate;
+      animation-delay: -0.5s;
+      box-shadow: 0px 0px 20px 10px darken(nth($colors, 2), 10%);
+
+    }
+    animation: show 2* $hDuration ease-in infinite;
+    animation-delay: -$hDuration;
+
+  }
+  &:nth-child(#{$staticsTotal}){
+    left: $staticPadding * $staticsTotal + $staticWidth;
+    box-shadow: 2px 0px 4px;
+    &:before{
+      box-shadow: 0px 0px 20px 10px lighten(nth($colors, 6),10%);
+    }
+    animation-delay: -$hDuration - $hDuration;
+
+  }
+}
+@keyframes show{
+  0%{
+    opacity: 0;
+  }
+  45%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  58.5%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+
+.move{
+  content: "q";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: $staticWidth;
+  height: $staticHeight;
+  border-radius: 50%;
+  background: honeydew;
+  animation:
+          h $hDuration linear infinite alternate,
+          v $vDuration ease-in-out infinite alternate,
+          color 2 * $hDuration steps(1) infinite
+;
+  animation-delay: 0s, -0.5s;
+  //transform: translateY($vDist);
+}
+//TODO: to the fade to white then the last static point releases it
+//a combination between steps and linear timing
+@keyframes color{
+  0%{
+    background: saturate(nth($colors,2), 25%);
+  }
+  @for $i from 1 through $staticsTotal - 1{
+    #{ ($i * 1s / $hDuration * 100)/2 }%{
+    background: saturate(nth($colors, ($i+1)), 25%);
+  }
+  #{ 50 + ($i * 1s / $hDuration * 100)/2 }%{
+  background: saturate(nth($colors, ($staticsTotal - $i)), 25%);
+  }
+
+  }
+  50%{
+    //background: darken(#F1ECDB,30%);
+  }
+  100%{
+    //background: darken(#F1ECDB,30%);
+  }
+}
+@keyframes textColor{
+  0%{
+    color: darken(nth($colors,2), 5%);
+  }
+  @for $i from 1 through $staticsTotal - 1{
+    #{ ($i * 1s / $hDuration * 100)/2 }%{
+    color: darken(nth($colors, ($i+1)), 5%);
+  }
+  #{ 50 + ($i * 1s / $hDuration * 100)/2 }%{
+  color: darken(nth($colors, ($staticsTotal - $i)), 5%);
+  }
+
+  }
+  50%{
+    //background: darken(#F1ECDB,30%);
+  }
+  100%{
+    //background: darken(#F1ECDB,30%);
+  }
+}
+@keyframes h{
+  0%{
+    left: 0
+  }
+  100%{
+    left: $hDist;
+  }
+}
+@keyframes v{
+  0%{
+    transform: translateY(-($vDist + $staticHeight) );
+  }
+  100%{
+    transform: translateY($vDist);
+  }
+}
+
+h2{
+  animation: textColor 2 * $hDuration steps(1) infinite;
+  background: darken(#F1ECDB, 20%);
+  float: left;
+  padding: 25px;
+}
+.pen{
+  width: $penWidth;
+  height: $penHeight;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+}
+html {
+  box-sizing: border-box;
+  background: rgb(56, 115, 152);
+  background: #F1ECDB;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}

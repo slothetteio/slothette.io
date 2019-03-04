@@ -13,8 +13,10 @@ import UriComponentEncodeDecode from "../handlers/tools/uri-component-encode-dec
 import HexEditor from "../handlers/tools/hex-editor";
 
 import Tables from "../handlers/tables";
-
 import XBase from '../handlers/tables/x-base';
+
+import CreativeCoding from '../handlers/creative-coding';
+import CreativeCodingDemo from '../handlers/creative-coding/demo/index.jsx';
 
 import NotFound from '../handlers/404';
 
@@ -68,6 +70,27 @@ let routes = [
     path: '/tables/x-base',
     component: XBase,
     label: 'x-base',
+  },
+
+  {
+    id: 'creative-coding',
+    path: '/creative-coding',
+    component: CreativeCoding,
+    label: 'creative coding',
+  },
+
+  {
+    id: 'creative-coding-css-sine-experiment',
+    path: '/creative-coding/css-sine-experiment',
+    component: () => <CreativeCodingDemo demoId="css-sine-experiment" />,
+    label: 'css sine experiment',
+  },
+
+  {
+    id: 'creative-coding-css-animation-demo-1',
+    path: '/creative-coding/css-animation-demo-1',
+    component: () => <CreativeCodingDemo demoId="css-animation-demo-1" />,
+    label: 'css animation demo',
   },
 
   {

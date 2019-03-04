@@ -14,6 +14,9 @@ let urls = [
   '/tables',
   '/tables/x-base',
   '/about',
+  '/creative-coding',
+  '/creative-coding/css-sine-experiment',
+  '/creative-coding/css-animation-demo-1',
   '/404',
 ];
 

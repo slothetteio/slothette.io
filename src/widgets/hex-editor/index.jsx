@@ -8,9 +8,10 @@ import NumberInBase from "../../elements/number-in-base";
 import css from './style.css';
 import commonCss from '../../css/common.css'
 
-function row(props) {
+function Row(props) {
   console.log('[r] row', props);
-  let {style, index, activeCell, onCellClick, bytes} = props;
+  let {data, style, index} = props;
+  let {bytes, activeCell, onCellClick} = data;
 
   let startCellIdx = index * 16;
   let endCellIdx = startCellIdx + 16;
@@ -52,19 +53,21 @@ function row(props) {
   );
 }
 
-function RowBuilder(props) {
-  let {data, style, index} = props;
-  let {bytes, activeCell, onCellClick} = data;
-  console.log('[R] RowBuilder', props);
-  return useMemo(
-    () => row({style, index, activeCell, bytes, onCellClick}),
-    [index, index === activeCell.row ? {} : 1]);
-}
+let RowMemo = memo(Row, (prevProps, nextProps) => {
+  let {data, index} = nextProps;
+  let {activeCell} = data;
+  let prevActiveCell = prevProps.data.activeCell;
 
-let RowBuilderMemo = memo(RowBuilder, (prevProps, nextProps) => {
-  // TODO: cater for the case when active cell changes but does not affect this row;
-  // currently the row renders anyways
+  let shouldRender = false;
+  if (activeCell.row === index) {
+    shouldRender = true;
+  }
+  if (prevActiveCell.row === index) {
+    shouldRender = true;
+  }
+
   return areEqual(prevProps, nextProps)
+    || !shouldRender;
 });
 
 /**
@@ -124,7 +127,7 @@ function HexEditorWidget(props) {
             onCellClick: props.onCellClick,
           }}
         >
-          {RowBuilderMemo}
+          {RowMemo}
         </FixedSizeList>
       </div>
     </div>

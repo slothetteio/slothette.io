@@ -45,10 +45,8 @@ npx webpack-dev-server
 ```bash
 USE_FULL_TEMPLATE=true USE_HASHES=true \
 USE_MINIFICATION=true EXTRACT_CSS=true \
-npx webpack --config webpack.config.js
-
-USE_MINIFICATION=true npx webpack --config webpack-server.config.js
-
-node build/export-html.js
+npx webpack --config webpack.config.js \
+&& USE_MINIFICATION=true npx webpack --config webpack-server.config.js \
+&& node build/export-html.js
 ```
 

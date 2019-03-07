@@ -103,6 +103,7 @@ function withController(Comp) {
 
       if (IS_SERVER) {
         // doing nothing on the server since this function uses browser specific apis
+        // TODO: could do a better job: if there's a search string, set true the `askUser` flag
         return null;
       }
 

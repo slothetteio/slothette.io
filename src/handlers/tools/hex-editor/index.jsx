@@ -40,16 +40,14 @@ function download(buffer, fileDetails) {
 
   // TODO: should remember the type and filename
   console.log('BUFF', buffer);
-  let reader = new FileReader();
-  reader.onload = function() {
-    console.log('done', reader);
+  let blob = new Blob([buffer], { type: 'application/octet-stream' });
+  let url = URL.createObjectURL(blob);
 
-    let a = document.createElement('a');
-    a.href = reader.result;
-    a.download = fileDetails.filename;
-    a.click();
-  };
-  reader.readAsDataURL(new Blob([buffer]));
+  let a = document.createElement('a');
+  a.download = fileDetails.filename;
+  a.href = url;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function fromDialog(e, setBuffer, setFileDetails) {

@@ -18,9 +18,7 @@ let demoList = {
 
 class CreativeCodingDemo extends React.Component{
   render() {
-    let props = this.props;
-    let { demoId } = props;
-    let demoInfo = demoList[demoId];
+    let demoInfo = demoList[this.props.cProps.demoId];
     let Comp = demoInfo.component;
     return (
       <div>

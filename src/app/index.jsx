@@ -24,7 +24,7 @@ import css from './style.css';
 import '../css/base.css';
 
 
-let About = function() {
+let About = function(props) {
   return (
     <div>
       <h1>About</h1>
@@ -36,70 +36,94 @@ let About = function() {
 
 let routes = [
   {
-    id: 'home',
     path: '/',
     component: Home,
-    label: 'Slothette.io',
+    cProps: { label: 'Slothette.io' }
   },
   {
-    id: 'tools',
     path: '/tools',
     component: Tools,
-    label: 'tools',
+    cProps: { label: 'tools' },
   },
   {
-    id: 'uri-component',
     path: '/tools/uri-component-encode-decode',
     component: UriComponentEncodeDecode,
-    label: 'uri component',
+    cProps: { label: 'uri component' },
   },
   {
-    id: 'hex-editor',
     path: '/tools/hex-editor',
     component: HexEditor,
-    label: 'hex editor',
+    cProps: { label: 'hex editor' },
   },
   {
-    id: 'tables',
     path: '/tables',
     component: Tables,
-    label: 'tables',
+    cProps: { label: 'tables' },
   },
   {
-    id: 'x-base',
     path: '/tables/x-base',
     component: XBase,
-    label: 'x-base',
+    cProps: { label: 'x-base' },
   },
 
   {
-    id: 'creative-coding',
     path: '/creative-coding',
     component: CreativeCoding,
-    label: 'creative coding',
+    cProps: { label: 'creative coding' },
   },
 
   {
-    id: 'creative-coding-css-sine-experiment',
     path: '/creative-coding/css-sine-experiment',
-    component: () => <CreativeCodingDemo demoId="css-sine-experiment" />,
-    label: 'css sine experiment',
+    component: CreativeCodingDemo,
+    cProps: {
+      label: 'css sine experiment',
+      demoId: 'css-sine-experiment',
+    },
   },
 
   {
-    id: 'creative-coding-css-animation-demo-1',
     path: '/creative-coding/css-animation-demo-1',
-    component: () => <CreativeCodingDemo demoId="css-animation-demo-1" />,
-    label: 'css animation demo',
+    component: CreativeCodingDemo,
+    cProps: {
+      label: 'css animation demo',
+      demoId: 'css-animation-demo-1',
+    },
   },
-
   {
-    id: 'about',
     path: '/about',
     component: About,
-    label: 'about',
+    cProps: { label: 'about' },
   },
 ];
+
+function rtor(r) {
+  return (
+    <Route
+      key={r.path}
+      path={r.path}
+      exact
+      render={function(routeProps) {
+        return <r.component {...routeProps} cProps={r.cProps} />
+      }}
+    />
+  );
+}
+function rtor2(r) {
+  return (
+    <Route
+      key={r.path}
+      path={r.path}
+      render={() => {
+        return (
+          <>
+            <Link to={r.path}>{r.cProps.label}</Link>
+            {' / '}
+          </>
+        );
+      }}
+    />
+  );
+}
 
 let App = function() {
   return (
@@ -108,29 +132,11 @@ let App = function() {
 
         <div className={css.breadcrumbs}>
           {' / '}
-          {/*TODO: leave the previous trail here if going back*/}
-          {routes.map((r) => {
-            return (
-              <Route
-                key={r.id}
-                path={r.path}
-                render={() => {
-                  return (
-                    <>
-                      <Link to={r.path}>{r.label}</Link>
-                      {' / '}
-                    </>
-                  );
-                }}
-              />
-            );
-          })}
+          {routes.map(rtor2)}
         </div>
 
         <Switch>
-          {routes.map((r) => {
-            return (<Route key={r.id} path={r.path} exact component={r.component} />);
-          })}
+          {routes.map(rtor)}
           <Route component={NotFound} />
         </Switch>
       </div>

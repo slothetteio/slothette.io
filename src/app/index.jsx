@@ -7,15 +7,11 @@ import Link, {External} from "../wrappers/link";
 // handlers
 import Home from "../handlers/home";
 
-import Tools from "../handlers/tools";
-
 import UriComponentEncodeDecode from "../handlers/tools/uri-component-encode-decode";
 import HexEditor from "../handlers/tools/hex-editor";
 
-import Tables from "../handlers/tables";
 import XBase from '../handlers/tables/x-base';
 
-import CreativeCoding from '../handlers/creative-coding';
 import CreativeCodingDemo from '../handlers/creative-coding/demo/index.jsx';
 
 import NotFound from '../handlers/404';
@@ -24,7 +20,7 @@ import css from './style.css';
 import '../css/base.css';
 
 
-let About = function(props) {
+let About = function() {
   return (
     <div>
       <h1>About</h1>
@@ -42,7 +38,19 @@ let routes = [
   },
   {
     path: '/tools',
-    component: Tools,
+    component: () => <>
+      <h2>Tools</h2>
+      <h3>
+        <Link to="/tools/uri-component-encode-decode">
+          URI component encode decode
+        </Link>
+      </h3>
+      <h3>
+        <Link to="/tools/hex-editor">
+          Hex editor
+        </Link>
+      </h3>
+    </>,
     cProps: { label: 'tools' },
   },
   {
@@ -57,7 +65,14 @@ let routes = [
   },
   {
     path: '/tables',
-    component: Tables,
+    component: () => <>
+      <h1>Tables</h1>
+      <h2>
+        <Link to="/tables/x-base">
+          XBase
+        </Link>
+      </h2>
+    </>,
     cProps: { label: 'tables' },
   },
   {
@@ -68,7 +83,19 @@ let routes = [
 
   {
     path: '/creative-coding',
-    component: CreativeCoding,
+    component: () => <>
+      <h2>Creative Coding</h2>
+      <h3>
+        <Link to="/creative-coding/css-sine-experiment">
+          CSS sine experiment
+        </Link>
+      </h3>
+      <h3>
+        <Link to="/creative-coding/css-animation-demo-1">
+          CSS animation demo 1
+        </Link>
+      </h3>
+    </>,
     cProps: { label: 'creative coding' },
   },
 

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Route, Switch } from "react-router-dom";
-
 import loadable from "@loadable/component";
 
 import Link, {External} from "../wrappers/link";

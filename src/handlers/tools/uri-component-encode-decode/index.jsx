@@ -1,19 +1,13 @@
 import React from 'react';
-
-import { withRouter } from 'react-router-dom';
+import loadable from "@loadable/component";
 
 import {WrappedLinkWithDefaults, External} from '../../../wrappers/link';
-import withController from './controller';
-
-import UriEncodeDecodeWidget from "../../../widgets/uri-encode-decode";
-
 
 import commonCss from '../../../css/common.css';
 
-let EnhancedUriEncodeDecodeWidget = withRouter(
-  withController(UriEncodeDecodeWidget),
-);
-
+let EnhancedUriEncodeDecodeWidget = loadable(() => {
+  return import('./enhanced.jsx');
+});
 
 function UriComponentEncodeDecode(props) {
   return (

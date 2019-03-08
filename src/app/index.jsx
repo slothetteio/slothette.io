@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Route, Switch } from "react-router-dom";
+
+import loadable from "@loadable/component";
 
 import Link, {External} from "../wrappers/link";
 
@@ -19,7 +21,6 @@ import NotFound from '../handlers/404';
 import css from './style.css';
 import '../css/base.css';
 
-
 let About = function() {
   return (
     <div>
@@ -28,6 +29,15 @@ let About = function() {
       <p>Favicon: Sloth by Jaime Serra from the Noun Project (https://thenounproject.com/term/sloth/214186)</p>
     </div>
   );
+};
+
+let demoList = {
+  'css-sine-experiment': loadable(function() {
+    return import('../handlers/creative-coding/demo/css-sine-experiment/index.jsx');
+  }),
+  'css-animation-demo-1': loadable(function() {
+    return import('../handlers/creative-coding/demo/css-animation-demo-1/index.jsx');
+  }),
 };
 
 let routes = [
@@ -80,7 +90,6 @@ let routes = [
     component: XBase,
     cProps: { label: 'x-base' },
   },
-
   {
     path: '/creative-coding',
     component: () => <>
@@ -100,22 +109,21 @@ let routes = [
   },
 
   {
-    path: '/creative-coding/css-sine-experiment',
+    path: `/creative-coding/:id(${Object.keys(demoList).join('|')})`,
     component: CreativeCodingDemo,
+    url: function(routeProps) {
+      return `/creative-coding/${routeProps.match.params.id}`;
+    },
     cProps: {
-      label: 'css sine experiment',
-      demoId: 'css-sine-experiment',
+      comp: function(routeProps) {
+        return demoList[routeProps.match.params.id];
+      },
+      label: function(routeProps) {
+        return routeProps.match.params.id.split('-').join(' ');
+      },
     },
   },
 
-  {
-    path: '/creative-coding/css-animation-demo-1',
-    component: CreativeCodingDemo,
-    cProps: {
-      label: 'css animation demo',
-      demoId: 'css-animation-demo-1',
-    },
-  },
   {
     path: '/about',
     component: About,
@@ -140,10 +148,12 @@ function rtor2(r) {
     <Route
       key={r.path}
       path={r.path}
-      render={() => {
+      render={(routeProps) => {
+        let label = typeof r.cProps.label === 'function' ? r.cProps.label(routeProps) : r.cProps.label;
+        let url = typeof r.url === 'function' ? r.url(routeProps) : r.path;
         return (
           <>
-            <Link to={r.path}>{r.cProps.label}</Link>
+            <Link to={url}>{label}</Link>
             {' / '}
           </>
         );

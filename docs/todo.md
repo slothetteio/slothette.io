@@ -11,3 +11,5 @@
   - og: url
 - find a way to use hydrate instead of render (react dom)
 - add link rel=canonical
+- optimize number-in-base since it adds a lot of unneded markup slowing the initial
+  render of the XBase page

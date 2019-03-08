@@ -6,7 +6,7 @@ import loadable from "@loadable/component";
 
 import Link, {External} from "../wrappers/link";
 
-// handlers
+
 import Home from "../handlers/home";
 
 import UriComponentEncodeDecode from "../handlers/tools/uri-component-encode-decode";
@@ -178,9 +178,9 @@ let App = function() {
         </Switch>
       </div>
       <div className={css.footer}>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <External to="https://github.com/slothetteio/slothette.io">Github</External>
+        <Link to="/">Home</Link> {' '}
+        <Link to="/about">About</Link> {' '}
+        <External to="https://github.com/slothetteio/slothette.io">Github</External> {' '}
       </div>
     </div>
   );

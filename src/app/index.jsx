@@ -17,7 +17,6 @@ import CreativeCodingDemo from '../handlers/creative-coding/demo/index.jsx';
 import NotFound from '../handlers/404';
 
 import css from './style.css';
-import '../css/base.css';
 
 let About = function() {
   return (

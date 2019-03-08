@@ -5,7 +5,6 @@ let CleanWebpackPlugin = require('clean-webpack-plugin');
 let FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const LoadablePlugin = require('@loadable/webpack-plugin');
 
 let MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -48,7 +47,6 @@ let plugins = [
     IS_SERVER: JSON.stringify(false),
     IS_CLIENT: JSON.stringify(true),
   }),
-  new LoadablePlugin(),
 ];
 
 if (useFullTemplate) {
@@ -101,6 +99,7 @@ let cssLoaders = extractCss ?
       loader: 'postcss-loader',
       options: {
         plugins: [
+          require('postcss-modules-values')(),
           require('postcss-nested')(),
         ],
       },

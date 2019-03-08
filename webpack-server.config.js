@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const LoadablePlugin = require('@loadable/webpack-plugin');
-
 function env(name, defValue) {
   let v = process.env[name];
   if (v !== undefined) {
@@ -39,7 +37,6 @@ let plugins = [
     IS_SERVER: JSON.stringify(true),
     IS_CLIENT: JSON.stringify(false),
   }),
-  new LoadablePlugin(),
 ];
 
 module.exports = {

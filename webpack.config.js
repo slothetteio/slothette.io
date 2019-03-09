@@ -4,6 +4,7 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
 let FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
+let OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 
 let MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -82,6 +83,10 @@ if (extractCss) {
   }));
 }
 
+if (useMinification) {
+  plugins.push(new OptimizeCssAssetsPlugin());
+}
+
 let cssLoaders = extractCss ?
   [
     {
@@ -92,7 +97,7 @@ let cssLoaders = extractCss ?
       loader: "css-loader",
       options: {
         modules: true,
-        localIdentName: '[local]-[hash:base64:5]',
+        localIdentName: useMinification ? '[hash:base64:5]' : '[local]-[hash:base64:5]',
       },
     },
     {
@@ -111,7 +116,7 @@ let cssLoaders = extractCss ?
       loader: "css-loader",
       options: {
         modules: true,
-        localIdentName: '[local]-[hash:base64:5]',
+        localIdentName: useMinification ? '[hash:base64:5]' : '[local]-[hash:base64:5]',
       },
     },
     {
@@ -135,7 +140,7 @@ let sassLoaders = extractCss ?
       loader: "css-loader",
       options: {
         modules: false,
-        localIdentName: '[local]-[hash:base64:5]',
+        localIdentName: useMinification ? '[hash:base64:5]' : '[local]-[hash:base64:5]',
       },
     },
     {
@@ -148,7 +153,7 @@ let sassLoaders = extractCss ?
       loader: "css-loader",
       options: {
         modules: false,
-        localIdentName: '[local]-[hash:base64:5]',
+        localIdentName: useMinification ? '[hash:base64:5]' : '[local]-[hash:base64:5]',
       },
     },
     {

@@ -76,7 +76,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: true,
-              localIdentName: '[local]-[hash:base64:5]',
+              localIdentName: useMinification ? '[hash:base64:5]' : '[local]-[hash:base64:5]',
               exportOnlyLocals: true,
             },
           },
@@ -97,7 +97,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: false,
-              localIdentName: '[local]-[hash:base64:5]',
+              localIdentName: useMinification ? '[hash:base64:5]' : '[local]-[hash:base64:5]',
               exportOnlyLocals: true,
             },
           },

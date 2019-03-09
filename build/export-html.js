@@ -17,6 +17,9 @@ let urls = [
   '/creative-coding',
   '/creative-coding/css-sine-experiment',
   '/creative-coding/css-animation-demo-1',
+  '/pg',
+  '/pg/button',
+  '/pg/checkbox',
   '/404',
 ];
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import { Link, withRouter } from "react-router-dom";
 import css from './style.css'
 
@@ -6,7 +7,7 @@ function WrappedLink(props) {
   return (
     <Link
       {...props}
-      className={css.Link}
+      className={cx(css.Link, {[css.inherit]: props.linkStyle === 'inherit'})}
     />
   );
 }

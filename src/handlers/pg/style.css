@@ -1,0 +1,46 @@
+.Pg {
+  display: flex;
+  flex-direction: row;
+}
+.sidebar {
+  margin-left: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+.mainContent {
+
+}
+
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuSectionHeading {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1.45rem;
+
+  padding: 5px 0;
+}
+
+.menuItem {
+  font-weight: bold;
+  font-size: 1.35rem;
+  &:hover {
+    background-color: lightgray;
+    color: palevioletred;
+  }
+  &.active {
+    background-color: pink;
+    color: black;
+  }
+  &>* {
+    display: block;
+    padding: 3px 6px;
+  }
+}
+

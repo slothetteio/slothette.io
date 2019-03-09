@@ -8,3 +8,9 @@
       text-decoration: underline;
     }
 }
+.inherit {
+  color: inherit;
+  &:hover {
+    text-decoration: inherit;
+  }
+}

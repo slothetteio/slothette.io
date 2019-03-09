@@ -122,6 +122,17 @@ let routes = [
   },
 
   {
+    path: '/pg',
+    component: loadable(function() {
+      return import('../handlers/pg/index.jsx');
+    }),
+    exact: false,
+    cProps: {
+      label: 'pg'
+    },
+  },
+
+  {
     path: '/about',
     component: About,
     cProps: { label: 'about' },
@@ -133,7 +144,7 @@ function rtor(r) {
     <Route
       key={r.path}
       path={r.path}
-      exact
+      exact={r.exact !== false}
       render={function(routeProps) {
         return <r.component {...routeProps} cProps={r.cProps} />
       }}
@@ -159,6 +170,13 @@ function rtor2(r) {
   );
 }
 
+function renderPlaygroundLink() {
+  if (process.env.NODE_ENV === 'development') {
+    return <Link to="/pg">PG</Link>
+  }
+  return null;
+}
+
 let App = function() {
   return (
     <div className={css.App}>
@@ -178,6 +196,7 @@ let App = function() {
         <Link to="/">Home</Link> {' '}
         <Link to="/about">About</Link> {' '}
         <External to="https://github.com/slothetteio/slothette.io">Github</External> {' '}
+        {renderPlaygroundLink()} {' '}
       </div>
     </div>
   );

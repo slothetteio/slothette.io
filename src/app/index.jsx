@@ -170,13 +170,6 @@ function rtor2(r) {
   );
 }
 
-function renderPlaygroundLink() {
-  if (process.env.NODE_ENV === 'development') {
-    return <Link to="/pg">PG</Link>
-  }
-  return null;
-}
-
 let App = function() {
   return (
     <div className={css.App}>
@@ -196,7 +189,7 @@ let App = function() {
         <Link to="/">Home</Link> {' '}
         <Link to="/about">About</Link> {' '}
         <External to="https://github.com/slothetteio/slothette.io">Github</External> {' '}
-        {renderPlaygroundLink()} {' '}
+        <Link to="/pg">PG</Link> {' '}
       </div>
     </div>
   );

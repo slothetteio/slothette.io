@@ -12,6 +12,7 @@ function ButtonElementDemo() {
   return (
     <div>
       <h2>Demo for the button element</h2>
+
       <h3>Variants</h3>
       <div>
         <B>
@@ -67,7 +68,6 @@ function ButtonElementDemo() {
 
 
       <h2>Disabled</h2>
-      <h2>ButtonElementDemo</h2>
       <h3>Variants</h3>
       <div>
         <B>
@@ -81,7 +81,7 @@ function ButtonElementDemo() {
         </B>
       </div>
 
-      <h3>Full</h3>
+      <h3>mode: full</h3>
       <div>
         <B>
           <Button disabled mode="full">Normal</Button>
@@ -94,7 +94,7 @@ function ButtonElementDemo() {
         </B>
       </div>
 
-      <h3>Ghost</h3>
+      <h3>mode: ghost</h3>
       <div>
         <B>
           <Button disabled mode="ghost">Normal</Button>
@@ -108,7 +108,7 @@ function ButtonElementDemo() {
       </div>
 
 
-      <h3>Transparent</h3>
+      <h3>mode: transparent</h3>
       <div>
         <B>
           <Button disabled mode="transparent">Normal</Button>

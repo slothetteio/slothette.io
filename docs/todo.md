@@ -13,3 +13,4 @@
 - add link rel=canonical
 - optimize number-in-base since it adds a lot of unneded markup slowing the initial
   render of the XBase page
+- remove `react-router-scroll-4` once chrome stops exhibiting strage scroll behavior

@@ -600,7 +600,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime@^7.0.0":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.4.tgz#73d12ba819e365fcf7fd152aed56d6df97d21c83"
   dependencies:
@@ -2065,6 +2065,12 @@ dom-converter@^0.2:
   resolved "https://registry.yarnpkg.com/dom-converter/-/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"
   dependencies:
     utila "~0.4"
+
+dom-helpers@^3.2.1:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
+  dependencies:
+    "@babel/runtime" "^7.1.2"
 
 dom-serializer@0, dom-serializer@~0.1.0:
   version "0.1.1"
@@ -5109,6 +5115,13 @@ react-router-dom@^4.3.1:
     react-router "^4.3.1"
     warning "^4.0.1"
 
+react-router-scroll-4@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react-router-scroll-4/-/react-router-scroll-4-1.0.0-beta.2.tgz#d887063ec0f66124aaf450158dd158ff7d3dc279"
+  dependencies:
+    scroll-behavior "^0.9.1"
+    warning "^3.0.0"
+
 react-router@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.3.1.tgz#aada4aef14c809cb2e686b05cee4742234506c4e"
@@ -5485,6 +5498,13 @@ schema-utils@^1.0.0:
     ajv "^6.1.0"
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
+
+scroll-behavior@^0.9.1:
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.9.10.tgz#c8953adeeb3586060b903328d860aa8346d62861"
+  dependencies:
+    dom-helpers "^3.2.1"
+    invariant "^2.2.2"
 
 scss-tokenizer@^0.2.3:
   version "0.2.3"

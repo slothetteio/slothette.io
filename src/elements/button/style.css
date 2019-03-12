@@ -1,6 +1,7 @@
 @value vars: '../../css/vars.css';
 @value transitionTimeAndEase from vars;
 @value mainTextColor from vars;
+@value outlineExpr from vars;
 
 @value buttonBorderIncreaseFactorDelta: 0.091;
 
@@ -16,6 +17,11 @@
   border-radius: 2px;
 
   padding: 4px 8px;
+
+  &:focus {
+    box-shadow: outlineExpr;
+    outline: none;
+  }
 
   transition: transform transitionTimeAndEase;
   & span {

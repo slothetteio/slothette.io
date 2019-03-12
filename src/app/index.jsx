@@ -128,7 +128,7 @@ let routes = [
     }),
     exact: false,
     cProps: {
-      label: 'pg'
+      label: 'playground'
     },
   },
 

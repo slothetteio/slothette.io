@@ -1,0 +1,89 @@
+@value vars: '../../css/vars.css';
+@value transitionTimeAndEase from vars;
+@value mainTextColor from vars;
+@value linkColor from vars;
+@value outlineExpr from vars;
+
+@value checkboxSize: 2.2rem;
+
+.Checkbox {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.input {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.label {
+  display: inline-block;
+  padding-left: 2px;
+  :disabled+& {
+    opacity: 0.7;
+    /*reset*/
+    cursor: not-allowed;
+  }
+  .Checkbox:hover :disabled+&:before,
+  .Checkbox:hover :disabled+&:after {
+    /*reset*/
+    border-color: mainTextColor;
+  }
+}
+
+.label, .input {
+  vertical-align: middle;
+}
+
+/* fake checkbox*/
+
+.input {
+  position: relative;
+  z-index: 3;
+}
+.label:before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: calc(checkboxSize - 4px);
+  height: calc(checkboxSize - 4px);
+  border-radius: 4px;
+  border: 2px solid mainTextColor;
+
+  transition: border-color transitionTimeAndEase;
+  .Checkbox:hover & {
+    border-color: linkColor;
+  }
+  :focus+& {
+    border-color: linkColor;
+    box-shadow: outlineExpr;
+  }
+
+  z-index: 1;
+}
+
+.label:after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 11px;
+  left: 0.9rem;
+  top: 0.5rem;
+  z-index: 3;
+  transform: rotateZ(45deg) scale(0);
+  transition: transform transitionTimeAndEase, border-color transitionTimeAndEase;
+  :checked+& {
+    transform: rotateZ(45deg) scale(1);
+  }
+  border-bottom: 2px solid mainTextColor;
+  border-right: 2px solid mainTextColor;
+  .Checkbox:hover & {
+    border-color: linkColor;
+  }
+
+}

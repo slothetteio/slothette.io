@@ -11,6 +11,9 @@ transition: color transitionTimeAndEase
  */
 
 @value linkColor: #1890ff;
+/* the link color with reduced opacity */
+@value outlineColor: hsla(209, 100%, 55%, 0.85);
+@value outlineExpr: outlineColor 0 0 3px 1px;
 @value transitionTimeAndEase:  0.15s ease-in-out;
 
 /*Same as in the html template*/

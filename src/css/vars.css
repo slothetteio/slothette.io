@@ -12,3 +12,6 @@ transition: color transitionTimeAndEase
 
 @value linkColor: #1890ff;
 @value transitionTimeAndEase:  0.15s ease-in-out;
+
+/*Same as in the html template*/
+@value mainTextColor: hsl(0, 0%, 30%);

@@ -1,22 +1,84 @@
 @value vars: '../../css/vars.css';
-@value linkColor from vars;
 @value transitionTimeAndEase from vars;
+@value mainTextColor from vars;
+
+@value buttonBorderIncreaseFactorDelta: 0.091;
 
 .Button {
-  background: transparent;
-
   font-size: 1.4rem;
   text-transform: uppercase;
-  cursor: pointer;
   font-weight: bold;
-  border: 1px solid transparent;
+  cursor: pointer;
+
+  color: mainTextColor;
+  border: 1px solid darkgray;
+  background-color: hsl(0, 0%, 98%);
+  border-radius: 2px;
+
   padding: 4px 8px;
-  transition: color transitionTimeAndEase, border-color transitionTimeAndEase;
+
+  transition: transform transitionTimeAndEase;
+  & span {
+    display: inline-block;
+    transition: transform transitionTimeAndEase;
+  }
+
+  &:not(:disabled):not(.m-transparent) {
+    &:hover {
+      border: 1px solid mainTextColor;
+      transform: scale(calc(1 + buttonBorderIncreaseFactorDelta)) rotateZ(-2deg);
+
+      & span {
+        transform: scale(calc(1 - (buttonBorderIncreaseFactorDelta / (1 + buttonBorderIncreaseFactorDelta)))) rotateZ(2deg);
+      }
+    }
+  }
 }
-.Button:hover:not(:disabled){
-  border: 1px solid linkColor;
-  color: linkColor;
+
+.v-positive {
+  color: hsla(139, 81%, 26%, 1);
+  border-color: hsla(139, 81%, 26%, 1);
 }
+.v-negative {
+  color: hsla(316, 64%, 51%, 1);
+  border-color: hsla(316, 64%, 51%, 1);
+}
+
+.m-full {
+  background-color: mainTextColor;
+  color: white;
+  &.v-positive {
+    background-color: hsla(139, 81%, 26%, 1);
+  }
+  &.v-negative {
+    background-color: hsla(316, 64%, 51%, 1);
+  }
+}
+.m-ghost {
+  border-color: transparent;
+  background: transparent;
+}
+
+.m-transparent {
+  composes: m-ghost;
+
+  &:hover {
+    transform: none;
+    border-color: transparent;
+    & span {
+      transform: scale(1.1) rotateZ(-1deg);;
+    }
+  }
+}
+
 .Button:disabled {
   cursor: not-allowed;
+  opacity: 0.6;
+  &.m-transparent:hover {
+    transform: none;
+    border-color: transparent;
+    & span {
+      transform: none
+    }
+  }
 }

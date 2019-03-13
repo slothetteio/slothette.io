@@ -8,11 +8,14 @@ import NotFound from '../../handlers/404/index';
 import ButtonElementDemo from './demo/elements/button';
 import CheckboxElementDemo from './demo/elements/checkbox';
 
+import ReactUseState from './demo/react/use-state/index.jsx'
+
 import css from './style.css';
 
 let demos = {
   'button': ButtonElementDemo,
   'checkbox': CheckboxElementDemo,
+  'react-use-state': ReactUseState,
 };
 
 function PgMain(props) {
@@ -20,7 +23,9 @@ function PgMain(props) {
     <div className={css.Pg}>
       <aside className={css.sidebar}>
         <ul className={css.menu}>
-          <li className={css.menuSectionHeading}>Elements</li>
+          <li className={css.menuSectionHeading}>
+            Elements
+          </li>
           <li className={css.menuItem}>
             <Link
               linkStyle="inherit"
@@ -35,6 +40,17 @@ function PgMain(props) {
               linkStyle="inherit"
             >
               checkbox
+            </Link>
+          </li>
+          <li className={css.menuSectionHeading}>
+            React Exp
+          </li>
+          <li className={css.menuItem}>
+            <Link
+              to="/pg/react-use-state"
+              linkStyle="inherit"
+            >
+              useState
             </Link>
           </li>
         </ul>

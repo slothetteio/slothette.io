@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Code(props) {
+function CodeBlock(props) {
   return (
-    <div style={{marginTop: 10, backgroundColor: '#fafafa', padding: 5}}>
+    <div style={{marginTop: 10, backgroundColor: '#fafafa', padding: 5, whiteSpace: 'pre-wrap'}}>
       <div>{props.label}</div>
       <hr />
       <code>
@@ -12,4 +12,4 @@ function Code(props) {
   );
 }
 
-export default Code;
+export default CodeBlock;

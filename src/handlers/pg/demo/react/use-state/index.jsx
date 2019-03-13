@@ -11,7 +11,7 @@ import ComplexValue from './complex-value.jsx';
 import ComplexValueCode from '!!raw-loader!./complex-value.jsx';
 
 
-import Code from "../../../../../elements/code";
+import CodeBlock from "../../../../../elements/code-block";
 
 function ReactUseState() {
   return (
@@ -19,21 +19,21 @@ function ReactUseState() {
       <h2>React use state</h2>
       <h3>Basic counter</h3>
       <BasicCounter />
-      <Code space="vertical" label="Code for basic counter">
+      <CodeBlock space="vertical" label="Code for basic counter">
         {BasicCounterCode}
-      </Code>
+      </CodeBlock>
 
       <h3>Multiple values</h3>
       <MultiValues />
-      <Code space="vertical" label="Code for multiple values">
+      <CodeBlock space="vertical" label="Code for multiple values">
         {MultiValuesCode}
-      </Code>
+      </CodeBlock>
 
       <h3>Complex value</h3>
       <ComplexValue />
-      <Code space="vertical" label="Code for complex value">
+      <CodeBlock space="vertical" label="Code for complex value">
         {ComplexValueCode}
-      </Code>
+      </CodeBlock>
     </div>
   );
 }

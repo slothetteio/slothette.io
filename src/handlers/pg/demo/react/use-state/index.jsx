@@ -1,6 +1,9 @@
 import React from 'react';
 
 
+import BasicInput from './basic-input.jsx';
+import BasicInputCode from '!!raw-loader!./basic-input.jsx';
+
 import BasicCounter from './basic-counter.jsx';
 import BasicCounterCode from '!!raw-loader!./basic-counter.jsx';
 
@@ -17,6 +20,12 @@ function ReactUseState() {
   return (
     <div>
       <h2>React use state</h2>
+      <h3>Basic input</h3>
+      <BasicInput />
+      <CodeBlock space="vertical" label="Code for basic input">
+        {BasicInputCode}
+      </CodeBlock>
+
       <h3>Basic counter</h3>
       <BasicCounter />
       <CodeBlock space="vertical" label="Code for basic counter">

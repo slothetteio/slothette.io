@@ -1,14 +1,35 @@
 import React from 'react';
+import Button from "../../../../../elements/button";
 
 function Example() {
-  let [value, setValue] = React.useState({a: 'value A', b: 'value B'});
+  let [value, setValue] = React.useState({
+    add: 1,
+    multiply: 2,
+    result: 1
+  });
   return (
     <div>
-      Update "a": <input value={value.a} onChange={e => setValue({...value, a: e.target.value})}/>
+      Take: {value.result}
       <br />
-      Update "b": <input value={value.b} onChange={e => setValue({...value, b: e.target.value})}/>
+      Add: <input value={value.add}
+                  type="number"
+                  onChange={e => setValue({...value, add: e.target.value})}/>
       <br />
-      Value is: {JSON.stringify(value)}
+      Multiply:
+      <input value={value.multiply}
+             type="number"
+             onChange={e => setValue({...value, multiply: e.target.value})}/>
+      <br />
+
+      <Button onClick={e => setValue(
+        ({add, multiply, result}) => ({
+          add,
+          multiply,
+          result: (result + add) * multiply,
+        })
+      )} >
+        Calculate
+      </Button>
     </div>
   );
 }

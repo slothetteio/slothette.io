@@ -8,11 +8,11 @@ function Example() {
       Counter value: {counter}
       <br />
       <Button variant="positive"
-              onClick={e => setCounter(counter + 1)}
+              onClick={e => setCounter(counter => counter + 1)}
       >Increment</Button>
       {' '}
       <Button variant="negative"
-              onClick={(e) => setCounter(counter - 1)}
+              onClick={e => setCounter(counter => counter - 1)}
       >Decrement</Button>
     </div>
   );

@@ -20,7 +20,7 @@ export default function NumberInBase(props) {
   let paddedValue = padLeft(value, props.pad, props.maxPad);
   let groups = makeGroups(paddedValue, props.small, props.big);
 
-  return (<code style={{fontSize: '1.8rem'}}>
+  return (<code>
     {groups.map((group, idx) => {
       return (
         <span

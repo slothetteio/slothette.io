@@ -22,7 +22,7 @@ function Example() {
       Outer state to trigger outer render
       <input value={outer} onChange={e => setOuter(e.target.value)}/>
       <br />
-      State passed to inner
+      State passed to inner to trigger also inner render
       <input value={passed} onChange={e => setPassed(e.target.value)} />
       <Inner isMemoised={false} passed={passed} />
       <MemoInner isMemoised={true} passed={passed} />

@@ -9,6 +9,7 @@ import ButtonElementDemo from './demo/elements/button';
 import CheckboxElementDemo from './demo/elements/checkbox';
 
 import ReactUseState from './demo/react/use-state/index.jsx'
+import ReactMemo from "./demo/react/memo";
 
 import css from './style.css';
 
@@ -16,6 +17,7 @@ let demos = {
   'button': ButtonElementDemo,
   'checkbox': CheckboxElementDemo,
   'react-use-state': ReactUseState,
+  'react-memo': ReactMemo,
 };
 
 function PgMain(props) {
@@ -45,12 +47,22 @@ function PgMain(props) {
           <li className={css.menuSectionHeading}>
             React Exp
           </li>
+
           <li className={css.menuItem}>
             <Link
               to="/pg/react-use-state"
               linkStyle="inherit"
             >
               useState
+            </Link>
+          </li>
+
+          <li className={css.menuItem}>
+            <Link
+              to="/pg/react-memo"
+              linkStyle="inherit"
+            >
+              memo
             </Link>
           </li>
         </ul>

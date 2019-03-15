@@ -1,11 +1,12 @@
 import React from 'react';
-import { id } from '../../../../../helpers/utils';
+import RenderCount from "../../../../../utils/render-count";
+
 
 
 function Inner({isMemoised, passed}) {
   return (
     <div>
-      <h3>{isMemoised ? 'Memoised' : 'Simple'} Inner ({id()})</h3>
+      <h3>{isMemoised ? 'Memoised' : 'Simple'} Inner <RenderCount /></h3>
       Passed in value is: {passed}
     </div>
   );
@@ -18,7 +19,7 @@ function Example() {
   let [passed, setPassed] = React.useState('passed');
   return (
     <div>
-      <h3>Outer ({id()})</h3>
+      <h3>Outer <RenderCount /></h3>
       Outer state to trigger outer render
       <input value={outer} onChange={e => setOuter(e.target.value)}/>
       <br />

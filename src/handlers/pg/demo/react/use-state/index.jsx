@@ -13,6 +13,9 @@ import MultiValuesCode from '!!raw-loader!./multi-values.jsx';
 import ComplexValue from './complex-value.jsx';
 import ComplexValueCode from '!!raw-loader!./complex-value.jsx';
 
+import ExpensiveInitialValue from './expensive-initial-value';
+import ExpensiveInitialValueCode from '!!raw-loader!./expensive-initial-value';
+
 
 import CodeBlock from "../../../../../elements/code-block";
 
@@ -42,6 +45,12 @@ function ReactUseState() {
       <ComplexValue />
       <CodeBlock space="vertical" label="Code for complex value">
         {ComplexValueCode}
+      </CodeBlock>
+
+      <h3>Expensive initial value</h3>
+      <ExpensiveInitialValue />
+      <CodeBlock space="vertical" label="Code for expensive initial value">
+        {ExpensiveInitialValueCode}
       </CodeBlock>
     </div>
   );

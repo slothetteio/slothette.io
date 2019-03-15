@@ -16,6 +16,11 @@ import ComplexValueCode from '!!raw-loader!./complex-value.jsx';
 import ExpensiveInitialValue from './expensive-initial-value';
 import ExpensiveInitialValueCode from '!!raw-loader!./expensive-initial-value';
 
+import ExternalOrInternalChange from './external-or-internal-change';
+import ExternalOrInternalChangeCode from '!!raw-loader!./external-or-internal-change';
+
+
+
 
 import CodeBlock from "../../../../../elements/code-block";
 
@@ -51,6 +56,12 @@ function ReactUseState() {
       <ExpensiveInitialValue />
       <CodeBlock space="vertical" label="Code for expensive initial value">
         {ExpensiveInitialValueCode}
+      </CodeBlock>
+
+      <h3>External or internal change</h3>
+      <ExternalOrInternalChange />
+      <CodeBlock space="vertical" label="Code for external or internal change">
+        {ExternalOrInternalChangeCode}
       </CodeBlock>
     </div>
   );

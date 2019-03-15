@@ -2,10 +2,10 @@ import React from 'react';
 import { id } from '../../../../../helpers/utils';
 
 
-function Inner({memoised, passed}) {
+function Inner({isMemoised, passed}) {
   return (
     <div>
-      <h3>{memoised ? 'Memoised' : 'Simple'} Inner ({id()})</h3>
+      <h3>{isMemoised ? 'Memoised' : 'Simple'} Inner ({id()})</h3>
       Passed in value is: {passed}
     </div>
   );
@@ -24,8 +24,8 @@ function Example() {
       <br />
       State passed to inner
       <input value={passed} onChange={e => setPassed(e.target.value)} />
-      <Inner memoised={false} passed={passed} />
-      <MemoInner memoised={true} passed={passed} />
+      <Inner isMemoised={false} passed={passed} />
+      <MemoInner isMemoised={true} passed={passed} />
     </div>
   );
 }
